@@ -94,3 +94,20 @@ from goodread_app.models import Book
 # Register your models here.
 admin.site.register(Book)
 ```
+
+
+## Module 03 - Install Django REST framework
+
+Django REST framework is a powerful and flexible toolkit for building Web APIs.
+
+```bash
+> pip install djangorestframework
+
+goodread/settings.py
+
+INSTALLED_APPS = [
+    ...
+    'goodread_app',
+    'rest_framework',
+]
+```
