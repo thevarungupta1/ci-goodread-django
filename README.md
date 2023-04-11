@@ -1,3 +1,3 @@
-Goodread - API Development Project
+# Goodread - API Development Project
 
-Module 01 - Setting Up Project
+## Module 01 - Setting Up Project
