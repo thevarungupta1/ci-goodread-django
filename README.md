@@ -113,7 +113,7 @@ INSTALLED_APPS = [
 ```
 
 
-## Module 03 - Create api for Book - Get
+## Module 04 - Create api for Book - Get
 
 create a rest api to fetch book data (getAllBooks and getBookById)
 
