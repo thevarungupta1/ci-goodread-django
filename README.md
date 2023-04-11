@@ -111,3 +111,77 @@ INSTALLED_APPS = [
     'rest_framework',
 ]
 ```
+
+
+## Module 03 - Create api for Book - Get
+
+create a rest api to fetch book data (getAllBooks and getBookById)
+
+create a new folder "api" inside goodread_app folder to have common place to have all api related code
+
+### create file goodread_app/api/serializers.py
+
+```bash
+from rest_framework import serializers
+
+class BookSerializer(serializers.Serializer):
+    id = serializers.IntegerField(read_only=True)
+    title = serializers.CharField()
+    author = serializers.CharField()
+    description = serializers.CharField()
+    image = serializers.CharField()
+    rating = serializers.DecimalField(max_digits=5, decimal_places=2)
+    active = serializers.BooleanField()
+```
+
+### create file goodread_app/api/views.py 
+
+```bash
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from goodread_app.models import Book
+from goodread_app.api.serializers import BookSerializer
+
+
+@api_view()
+def book_list(request):
+    books = Book.objects.all()
+    serializer = BookSerializer(books, many=True)
+    return Response(serializer.data)
+
+@api_view()
+def book_details(request, pk):
+    book = Book.objects.get(pk=pk)
+    serializer = BookSerializer(book)
+    return Response(serializer.data)
+```
+
+### create file goodread_app/api/urls.py
+
+```bash
+from django.urls import path, include
+from goodread_app.api.views import book_list, book_details
+
+urlpatterns = [
+    path('list/', book_list, name='book-list'),
+    path('<int:pk>/', book_details, name='book-detail'),
+]
+```
+
+### update file goodread/urls.py
+
+```bash
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('book/', include('goodread_app.api.urls'))
+]
+```
+
+### Open the browser and test api
+```bash
+http://localhost:8000/book/list/
+http://localhost:8000/book/1
+```
