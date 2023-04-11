@@ -85,4 +85,12 @@ class Book(models.Model):
 > python manage.py migrate
 > python manage.py runserver
 
+
+goodread_app/admin.py
+
+from django.contrib import admin
+from goodread_app.models import Book
+
+# Register your models here.
+admin.site.register(Book)
 ```
